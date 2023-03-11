@@ -206,6 +206,7 @@ return packer.startup(function(use)
 
   --debugging
   use("mfussenegger/nvim-dap")
+  use("jay-babu/mason-nvim-dap.nvim")
   use("nvim-telescope/telescope-dap.nvim")
   use({ "theHamsta/nvim-dap-virtual-text", requires = { "mfussenegger/nvim-dap" } })
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
