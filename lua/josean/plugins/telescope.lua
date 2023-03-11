@@ -34,6 +34,14 @@ telescope.setup({
       },
     },
   },
+  extensions = {
+    undo = {
+      -- requires https://github.com/dandavison/delta
+      use_delta = true,
+      side_by_side = true,
+    },
+  },
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("undo")
