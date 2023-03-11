@@ -45,3 +45,5 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("undo")
+-- https://github.com/nvim-telescope/telescope-dap.nvim
+telescope.load_extension("dap")
