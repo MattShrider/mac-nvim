@@ -142,6 +142,66 @@ return packer.startup(function(use)
     end,
   })
 
+  -- Project folders and save sessions
+  use({
+    "gnikdroy/projections.nvim",
+    config = function()
+      require("projections").setup({
+        workspaces = {
+          -- Change this to wherever you clone your projects
+          "~/dev",
+        },
+
+        -- Before saving a session, close out buffers that dirty the session file
+        store_hooks = {
+          pre = function()
+            -- nvim-tree
+            local nvim_tree_present, api = pcall(require, "nvim-tree.api")
+            if nvim_tree_present then
+              api.tree.close()
+            end
+
+            -- neo-tree
+            if pcall(require, "neo-tree") then
+              vim.cmd([[Neotree action=close]])
+            end
+          end,
+        },
+      })
+
+      -- Bind <leader>fp to Telescope projections
+      require("telescope").load_extension("projections")
+      vim.keymap.set("n", "<leader>fp", function()
+        vim.cmd("Telescope projections")
+      end)
+
+      -- Sessions are opt-in
+      -- Autostore session on VimExit
+      -- local Session = require("projections.session")
+      -- vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+      --     callback = function() Session.store(vim.loop.cwd()) end,
+      -- })
+      --
+      -- -- Switch to project if vim was started in a project dir
+      -- local switcher = require("projections.switcher")
+      -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+      --     callback = function()
+      --         if vim.fn.argc() == 0 then switcher.switch(vim.loop.cwd()) end
+      --     end,
+      -- })
+
+      -- Adds user commands for manually storing and restoring sessions
+      local Session = require("projections.session")
+      vim.api.nvim_create_user_command("StoreProjectSession", function()
+        Session.store(vim.loop.cwd())
+      end, {})
+
+      vim.api.nvim_create_user_command("RestoreProjectSession", function()
+        Session.restore(vim.loop.cwd())
+      end, {})
+    end,
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end
