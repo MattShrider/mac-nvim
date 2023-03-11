@@ -17,8 +17,11 @@ opt.wrap = false -- disable line wrapping
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
--- cursor line
+-- cursor line, guides, hidden chars
 opt.cursorline = true -- highlight the current cursor line
+vim.opt.list = true
+vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("space:⋅")
 
 -- appearance
 

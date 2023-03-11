@@ -41,7 +41,22 @@ return packer.startup(function(use)
 
   -- essential plugins
   use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+  use("tpope/vim-sleuth") -- smart indent matching
   use("inkarkat/vim-ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
+
+  -- Shows keymaps interactively as you type
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
 
   -- commenting with gc
   use("numToStr/Comment.nvim")
@@ -100,6 +115,9 @@ return packer.startup(function(use)
     end,
   })
 
+  -- indent guides and hidden chars
+  use("lukas-reineke/indent-blankline.nvim")
+
   -- auto closing
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
@@ -107,6 +125,14 @@ return packer.startup(function(use)
   -- git integration
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
   use("tpope/vim-fugitive")
+  use({
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  })
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
+  -- Find and replace
+  use({ "windwp/nvim-spectre" })
 
   if packer_bootstrap then
     require("packer").sync()
