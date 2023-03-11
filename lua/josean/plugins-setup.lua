@@ -211,6 +211,7 @@ return packer.startup(function(use)
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
   -- requires delve
   use("leoluz/nvim-dap-go")
+  use("David-Kunz/jester")
 
   if packer_bootstrap then
     require("packer").sync()
