@@ -67,7 +67,8 @@ keymap.set("n", "<leader>gs", "<cmd>Git<cr>") -- list current changes per file w
 -- restart lsp server (not on youtube nvim video)
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
+-- Spectre find and replace
 keymap.set("n", "<leader>fr", function()
   require("spectre").open_visual({ select_word = true })
-end, { desc = "[F]ind with [S]pectre" }, { desc = "[F]ind and [R]eplace" })
+end, { desc = "[F]ind with [S]pectre" })
 keymap.set("v", "<leader>fr", require("spectre").open_visual, { desc = "[F]ind and [R]eplace" })
