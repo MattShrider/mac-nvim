@@ -40,7 +40,8 @@ nvimtree.setup({
 })
 
 -- open nvim-tree on setup
-
+-- Despite the name, this is really making sure we set
+-- the correct root dir on start
 local function open_nvim_tree(data)
   -- buffer is a [No Name]
   local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
@@ -58,7 +59,7 @@ local function open_nvim_tree(data)
   end
 
   -- open the tree
-  require("nvim-tree.api").tree.open()
+  -- require("nvim-tree.api").tree.open()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
